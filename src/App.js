@@ -1,11 +1,11 @@
 import "./App.css";
-import EnterTask from "./components/EnterTask";
+import EnterSub from "./components/EnterSub";
 
 function App() {
   return (
     <div className="App">
       <h1>Subscription List</h1>
-      <EnterTask/>
+      <EnterSub/>
    
     </div>
   );
