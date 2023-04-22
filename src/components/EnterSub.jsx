@@ -4,12 +4,17 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
-const EnterSub = () => {
+const EnterSub = (props) => {
   const [subItem, setSubItem] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(subItem);
+    if (subItem.trim().length === 0) {
+      alert("Please enter an item");
+    } else {
+      props.onAddItem(subItem);
+      setSubItem("");
+    }
   };
 
   const handleInputChange = (e) => {
