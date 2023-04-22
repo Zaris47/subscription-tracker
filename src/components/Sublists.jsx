@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Sublists = (props) => {
+const SubLists = (props) => {
   return (
     <div>Sublists</div>
   )
 }
 
-export default Sublists
+export default SubLists

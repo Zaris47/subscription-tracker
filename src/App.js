@@ -1,6 +1,6 @@
 import "./App.css";
 import EnterSub from "./components/EnterSub";
-import Sublists from "./components/Sublists";
+import SubLists from "./components/SubLists";
 
 function App() {
 
@@ -11,6 +11,7 @@ function App() {
     <div className="App">
       <h1>Subscription List</h1>
       <EnterSub onAddItem={addItemHandler}/>
+      <SubLists />
    
     </div>
   );
