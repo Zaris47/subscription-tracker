@@ -1,8 +1,11 @@
 import React from 'react'
+import Container from '@mui/material/Container';
+
 
 const SubLists = (props) => {
   return (
-    <div>Sublists</div>
+    <Container maxWidth="md">
+    </Container>
   )
 }
 

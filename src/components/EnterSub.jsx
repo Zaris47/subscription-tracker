@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
+import Slide from "@mui/material/Slide";
 import Snackbar from "@mui/material/Snackbar";
 
 const EnterSub = (props) => {
@@ -11,9 +12,12 @@ const EnterSub = (props) => {
   const [open, setOpen] = useState(false);
 
   // Handling Error Snackbar
+  const SlideTransition = (props) => {
+    return <Slide {...props} direction="down" />;
+  };
 
   const handleClose = (event, reason) => {
-    if ("clickaway" == reason) {
+    if (reason === "clickaway") {
       return;
     }
     setOpen(false);
@@ -61,6 +65,7 @@ const EnterSub = (props) => {
         open={open}
         autoHideDuration={2000}
         onClose={handleClose}
+        TransitionComponent={SlideTransition}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert
