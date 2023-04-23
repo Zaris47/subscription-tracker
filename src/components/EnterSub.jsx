@@ -3,13 +3,35 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import Alert from "@mui/material/Alert";
+import Slide from "@mui/material/Slide";
+import Snackbar from "@mui/material/Snackbar";
 
-const EnterSub = () => {
+const EnterSub = (props) => {
   const [subItem, setSubItem] = useState("");
+  const [open, setOpen] = useState(false);
+
+  // Handling Error Snackbar
+  const SlideTransition = (props) => {
+    return <Slide {...props} direction="down" />;
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(subItem);
+    if (subItem.trim().length === 0) {
+      // alert("Please enter an item");
+      setOpen(true);
+    } else {
+      props.onAddItem(subItem);
+      setSubItem("");
+    }
   };
 
   const handleInputChange = (e) => {
@@ -39,6 +61,22 @@ const EnterSub = () => {
           Add
         </Button>
       </Stack>
+      <Snackbar
+        open={open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        TransitionComponent={SlideTransition}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Please enter an item!
+        </Alert>
+      </Snackbar>
     </form>
   );
 };
