@@ -10,6 +10,12 @@ import IconButton from "@mui/material/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const SubLists = (props) => {
+
+    const handleDelete = (index) => {
+        props.setSubList((prevList) => prevList.filter((item, i) => i !== index));
+      };
+
+      
   return (
     <Container maxWidth="md">
       {props.subList.length > 0 ? (
@@ -19,7 +25,7 @@ const SubLists = (props) => {
               <ListItem
                 key={index}
                 secondaryAction={
-                  <IconButton edge="end" aria-label="delete">
+                  <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(index)}>
                     <DeleteIcon />
                     <ClearIcon />
                   </IconButton>

@@ -23,7 +23,7 @@ function App() {
         setSubList={setSubList}
         onAddItem={addItemHandler}
       />
-      <SubLists subList={subList}/>
+      <SubLists subList={subList} setSubList={setSubList} />
     </div>
   );
 }
