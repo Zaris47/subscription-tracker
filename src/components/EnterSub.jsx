@@ -6,10 +6,13 @@ import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import Slide from "@mui/material/Slide";
 import Snackbar from "@mui/material/Snackbar";
+import InputAdornment from "@mui/material/InputAdornment";
+import { NumericFormat } from "react-number-format";
 
 const EnterSub = (props) => {
   const [subItem, setSubItem] = useState("");
   const [open, setOpen] = useState(false);
+  const [subCost, setSubCost] = useState("");
 
   // Handling Error Snackbar
   const SlideTransition = (props) => {
@@ -25,17 +28,35 @@ const EnterSub = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (subItem.trim().length === 0) {
+    if (subItem.trim().length === 0 || subCost.trim().length === 0 ) {
       // alert("Please enter an item");
       setOpen(true);
     } else {
+      // const newItem = {
+      //   subItem: subItem,
+      //   subCost: subCost
+      // };
+       //props.onAddItem(newItem);
       props.onAddItem(subItem);
+      console.log(subCost);
       setSubItem("");
+      setSubCost("0");
     }
   };
 
   const handleInputChange = (e) => {
     setSubItem(e.target.value);
+  };
+
+  const handleSubCost = (e) => {
+    setSubCost(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit(e);
+    }
   };
 
   return (
@@ -51,10 +72,30 @@ const EnterSub = (props) => {
         >
           <TextField
             id="filled-basic"
-            label="Enter Task"
+            label="Enter Subscription"
             variant="filled"
             value={subItem}
             onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+          />
+
+          <TextField
+            label="Currency"
+            value={subCost}
+            onChange={handleSubCost}
+            id="formatted-numberformat-input"
+            InputProps={{
+              inputComponent: NumericFormat,
+              inputProps: {
+                thousandSeparator: true,
+                //prefix: "$",
+                valueIsNumericString: true,
+              },
+              startAdornment: (
+                <InputAdornment position="start">$</InputAdornment>
+              ),
+            }}
+            variant="standard"
           />
         </Box>
         <Button variant="contained" type="submit">
@@ -74,7 +115,7 @@ const EnterSub = (props) => {
           variant="filled"
           sx={{ width: "100%" }}
         >
-          Please enter an item!
+          Please enter all fields!
         </Alert>
       </Snackbar>
     </form>
