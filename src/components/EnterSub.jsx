@@ -40,7 +40,7 @@ const EnterSub = (props) => {
       props.onAddItem(subItem);
       console.log(subCost);
       setSubItem("");
-      setSubCost("0");
+      setSubCost("");
     }
   };
 
