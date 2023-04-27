@@ -9,8 +9,11 @@ import Snackbar from "@mui/material/Snackbar";
 import InputAdornment from "@mui/material/InputAdornment";
 import { NumericFormat } from "react-number-format";
 import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import Divider from "@mui/material/Divider";
+
 
 const EnterSub = (props) => {
   const [subItem, setSubItem] = useState("");
@@ -32,7 +35,11 @@ const EnterSub = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (subItem.trim().length === 0 || subCost.trim().length === 0 || subTP.trim().length === 0 ) {
+    if (
+      subItem.trim().length === 0 ||
+      subCost.trim().length === 0 ||
+      subTP.trim().length === 0
+    ) {
       // alert("Please enter an item");
       setOpen(true);
     } else {
@@ -74,7 +81,7 @@ const EnterSub = (props) => {
 
   return (
     <form className="Enter-Task" onSubmit={handleSubmit}>
-      <Stack direction="row" spacing={2} justifyContent="center">
+      <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" >
         <Box
           component="form"
           sx={{
@@ -111,18 +118,19 @@ const EnterSub = (props) => {
             variant="standard"
             onKeyPress={handleKeyPress}
           />
-
-          <InputLabel id="sub-billing-cycle">B</InputLabel>
-          <Select
-            labelId="sub-billing-cycle"
-            id="billing-cycle"
-            value={subTP}
-            label="Billing Cycle"
-            onChange={handleSubTP}
-          >
-            <MenuItem value="Monthly">Monthly</MenuItem>
-            <MenuItem value="Yearly">Yearly</MenuItem>
-          </Select>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <Select
+              value={subTP}
+              autoWidth
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+              onChange={handleSubTP}
+            >
+              <MenuItem value="Monthly">Monthly</MenuItem>
+              <MenuItem value="Yearly">Yearly</MenuItem>
+            </Select>
+            <FormHelperText>Select billing cycle</FormHelperText>
+          </FormControl>
         </Box>
         <Button variant="contained" type="submit">
           Add
