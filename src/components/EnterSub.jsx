@@ -109,6 +109,7 @@ const EnterSub = (props) => {
               ),
             }}
             variant="standard"
+            onKeyPress={handleKeyPress}
           />
 
           <InputLabel id="sub-billing-cycle">B</InputLabel>
