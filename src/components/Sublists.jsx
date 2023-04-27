@@ -7,15 +7,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import ClearIcon from "@mui/icons-material/Clear";
+import Grid from "@mui/material/Grid";
 
 const SubLists = (props) => {
+  const handleDelete = (index) => {
+    props.setSubList((prevList) => prevList.filter((item, i) => i !== index));
+  };
 
-    const handleDelete = (index) => {
-        props.setSubList((prevList) => prevList.filter((item, i) => i !== index));
-      };
-
-      
   return (
     <Container maxWidth="md">
       {props.subList.length > 0 ? (
@@ -25,15 +23,32 @@ const SubLists = (props) => {
               <ListItem
                 key={index}
                 secondaryAction={
-                  <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(index)}>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => handleDelete(index)}
+                  >
                     <DeleteIcon />
-                    <ClearIcon />
                   </IconButton>
                 }
               >
-                <Typography sx={{ mt: 2, mb: 2 }} variant="h6" component="div">
-                  {item}
-                </Typography>
+                <Grid container spacing={2} alignItems="center">
+                  <Grid item xs={6}>
+                    <Typography variant="h6" component="div">
+                      {item.subItem}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="h6" component="div" textAlign="right">
+                      ${item.subCost} / 
+                    </Typography>
+                    <Typography variant="body2" component="div" textAlign="right">
+                      {item.subTP}
+                    </Typography>
+                  </Grid>
+
+                </Grid>
+
                 {/*alternative way to show the list  */}
                 {/* <ListItemText primary={item}/> */}
               </ListItem>

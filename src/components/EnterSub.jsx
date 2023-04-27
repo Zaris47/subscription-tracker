@@ -8,11 +8,15 @@ import Slide from "@mui/material/Slide";
 import Snackbar from "@mui/material/Snackbar";
 import InputAdornment from "@mui/material/InputAdornment";
 import { NumericFormat } from "react-number-format";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 
 const EnterSub = (props) => {
   const [subItem, setSubItem] = useState("");
   const [open, setOpen] = useState(false);
   const [subCost, setSubCost] = useState("");
+  const [subTP, setSubTP] = useState("");
 
   // Handling Error Snackbar
   const SlideTransition = (props) => {
@@ -28,7 +32,7 @@ const EnterSub = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (subItem.trim().length === 0 || subCost.trim().length === 0 ) {
+    if (subItem.trim().length === 0 || subCost.trim().length === 0 || subTP.trim().length === 0 ) {
       // alert("Please enter an item");
       setOpen(true);
     } else {
@@ -36,11 +40,16 @@ const EnterSub = (props) => {
       //   subItem: subItem,
       //   subCost: subCost
       // };
-       //props.onAddItem(newItem);
-      props.onAddItem(subItem);
-      console.log(subCost);
+      //props.onAddItem(newItem);
+      const newItem = {
+        subItem: subItem,
+        subCost: subCost,
+        subTP: subTP,
+      };
+      props.onAddItem(newItem);
       setSubItem("");
-      setSubCost("0");
+      setSubCost("");
+      setSubTP("");
     }
   };
 
@@ -50,6 +59,10 @@ const EnterSub = (props) => {
 
   const handleSubCost = (e) => {
     setSubCost(e.target.value);
+  };
+
+  const handleSubTP = (e) => {
+    setSubTP(e.target.value);
   };
 
   const handleKeyPress = (e) => {
@@ -96,7 +109,20 @@ const EnterSub = (props) => {
               ),
             }}
             variant="standard"
+            onKeyPress={handleKeyPress}
           />
+
+          <InputLabel id="sub-billing-cycle">B</InputLabel>
+          <Select
+            labelId="sub-billing-cycle"
+            id="billing-cycle"
+            value={subTP}
+            label="Billing Cycle"
+            onChange={handleSubTP}
+          >
+            <MenuItem value="Monthly">Monthly</MenuItem>
+            <MenuItem value="Yearly">Yearly</MenuItem>
+          </Select>
         </Box>
         <Button variant="contained" type="submit">
           Add
