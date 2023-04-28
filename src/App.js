@@ -2,6 +2,8 @@ import "./App.css";
 import EnterSub from "./components/EnterSub";
 import SubLists from "./components/SubLists";
 import React, { useState, useEffect } from "react";
+import Typography from "@mui/material/Typography";
+
 
 function App() {
   const [subList, setSubList] = useState([]);
@@ -14,10 +16,12 @@ function App() {
   useEffect(() => {
     console.log(subList);
   }, [subList]);
+
+  
   return (
     <div className="App">
-      <h1>Subscription List</h1>
-      <EnterSub
+      <Typography variant="h2" className="title">Subscription List</Typography>
+      <EnterSub 
         subList={subList}
         setSubList={setSubList}
         onAddItem={addItemHandler}

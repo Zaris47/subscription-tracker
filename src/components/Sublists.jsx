@@ -1,4 +1,5 @@
 import React from "react";
+import "./SubLists.css";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -14,8 +15,16 @@ const SubLists = (props) => {
     props.setSubList((prevList) => prevList.filter((item, i) => i !== index));
   };
 
+  const lastIndex = props.subList.length - 1;
+
   return (
-    <Container maxWidth="md">
+    <Container
+      maxWidth="md"
+      className="list"
+      sx={{
+        border: "2px solid #f1f1f1",
+      }}
+    >
       {props.subList.length > 0 ? (
         <List>
           {props.subList.map((item, index) => (
@@ -40,20 +49,23 @@ const SubLists = (props) => {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6" component="div" textAlign="right">
-                      ${item.subCost} / 
+                      ${item.subCost} /
                     </Typography>
-                    <Typography variant="body2" component="div" textAlign="right">
+                    <Typography
+                      variant="body2"
+                      component="div"
+                      textAlign="right"
+                    >
                       {item.subTP}
                     </Typography>
                   </Grid>
-
                 </Grid>
 
                 {/*alternative way to show the list  */}
                 {/* <ListItemText primary={item}/> */}
               </ListItem>
-
-              <Divider />
+              {index !== lastIndex && <Divider />}
+              {/* <Divider /> */}
             </>
           ))}
         </List>
