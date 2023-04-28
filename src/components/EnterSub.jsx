@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./EnterSub.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -12,7 +13,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
-import Divider from "@mui/material/Divider";
+import InputLabel from '@mui/material/InputLabel';
 
 
 const EnterSub = (props) => {
@@ -81,7 +82,12 @@ const EnterSub = (props) => {
 
   return (
     <form className="Enter-Task" onSubmit={handleSubmit}>
-      <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" >
+      <Stack
+        direction="row"
+        spacing={2}
+        justifyContent="center"
+        alignItems="center"
+      >
         <Box
           component="form"
           sx={{
@@ -94,13 +100,16 @@ const EnterSub = (props) => {
             id="filled-basic"
             label="Enter Subscription"
             variant="filled"
+            size="small"
             value={subItem}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
           />
 
           <TextField
-            label="Currency"
+          className="input"
+            size="small"
+            label="Amount"
             value={subCost}
             onChange={handleSubCost}
             id="formatted-numberformat-input"
@@ -115,11 +124,14 @@ const EnterSub = (props) => {
                 <InputAdornment position="start">$</InputAdornment>
               ),
             }}
-            variant="standard"
+            variant="filled"
             onKeyPress={handleKeyPress}
           />
-          <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <FormControl sx={{ m: 1, minWidth: 120 }} variant="filled">
+          <InputLabel id="billing-label">Billing</InputLabel>
             <Select
+            labelId="billing-label"
+              size="small"
               value={subTP}
               autoWidth
               displayEmpty
@@ -129,7 +141,7 @@ const EnterSub = (props) => {
               <MenuItem value="Monthly">Monthly</MenuItem>
               <MenuItem value="Yearly">Yearly</MenuItem>
             </Select>
-            <FormHelperText>Select billing cycle</FormHelperText>
+            {/* Incase changing input variant <FormHelperText>Select billing cycle</FormHelperText> */}
           </FormControl>
         </Box>
         <Button variant="contained" type="submit">
